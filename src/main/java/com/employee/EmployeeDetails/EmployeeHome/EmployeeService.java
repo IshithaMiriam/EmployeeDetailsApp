@@ -47,9 +47,18 @@ public class EmployeeService {
         if (existing == null) {
             throw new RuntimeException("Employee not found");
         }
-        existing.setName(employee.getName());
-        existing.setDepartment(employee.getDepartment());
-        existing.setSalary(employee.getSalary());
+        if (employee.getName() != null) {
+            existing.setName(employee.getName());
+        }
+        if (employee.getDepartment() != null) {
+            existing.setDepartment(employee.getDepartment());
+        }
+        if (employee.getSalary() != 0) {
+            existing.setSalary(employee.getSalary());
+        }
+        if (employee.getId() != null && !employee.getId().equals(id)) {
+            throw new RuntimeException("Employee ID cannot be changed");
+        }
         return repository.save(existing);
     }
 
