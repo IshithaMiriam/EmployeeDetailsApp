@@ -15,9 +15,9 @@ public class EmployeeController {
     }                                      //constructor injection
 
     @PostMapping
-    public String createEmployee(@RequestBody EmployeeEntity employee) {
-        return service.createEmployee(employee);
-    }      //@RequestBody converts the JSON from postman and converts into an object of entity
+    public String createEmployee(@RequestBody List<EmployeeEntity> employees) {
+        return service.createEmployee(employees);
+    }     //@RequestBody converts the JSON from postman and converts into an object of entity
 
     @GetMapping
     public List<EmployeeEntity> getAllEmployees() {
