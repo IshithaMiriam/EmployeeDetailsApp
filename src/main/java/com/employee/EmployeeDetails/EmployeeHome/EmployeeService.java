@@ -2,7 +2,9 @@ package com.employee.EmployeeDetails.EmployeeHome;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EmployeeService {
@@ -13,12 +15,19 @@ public class EmployeeService {
         this.repository = repository;
     }
 
-    public String createEmployee(EmployeeEntity employee) {
-        if (repository.existsById(employee.getId())) {
-            return "Employee ID already exists";
+    public String createEmployee(List<EmployeeEntity> employees) {
+        Set<Long> ids = new HashSet<>();
+        for (EmployeeEntity employee : employees) {
+            if (!ids.add(employee.getId())) {
+                return "Duplicate ID "+employee.getId()+" found in request";
+            }
+
+            if (repository.existsById(employee.getId())) {
+                return "Employee with ID "+employee.getId()+" already exists";
+            }
         }
-        repository.save(employee);
-        return "Employee created successfully";
+        repository.saveAll(employees);
+        return "Employees created successfully";
     }
 
     public List<EmployeeEntity> getAllEmployees() {
@@ -38,9 +47,18 @@ public class EmployeeService {
         if (existing == null) {
             throw new RuntimeException("Employee not found");
         }
-        existing.setName(employee.getName());
-        existing.setDepartment(employee.getDepartment());
-        existing.setSalary(employee.getSalary());
+        if (employee.getName() != null) {
+            existing.setName(employee.getName());
+        }
+        if (employee.getDepartment() != null) {
+            existing.setDepartment(employee.getDepartment());
+        }
+        if (employee.getSalary() != 0) {
+            existing.setSalary(employee.getSalary());
+        }
+        if (employee.getId() != null && !employee.getId().equals(id)) {
+            throw new RuntimeException("Employee ID cannot be changed");
+        }
         return repository.save(existing);
     }
 

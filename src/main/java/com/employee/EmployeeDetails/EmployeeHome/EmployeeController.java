@@ -1,5 +1,6 @@
 package com.employee.EmployeeDetails.EmployeeHome;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,9 @@ public class EmployeeController {
     }                                      //constructor injection
 
     @PostMapping
-    public String createEmployee(@RequestBody EmployeeEntity employee) {
-        return service.createEmployee(employee);
-    }      //@RequestBody converts the JSON from postman and converts into an object of entity
+    public String createEmployee(@RequestBody List<EmployeeEntity> employees) {
+        return service.createEmployee(employees);
+    }     //@RequestBody converts the JSON from postman and converts into an object of entity
 
     @GetMapping
     public List<EmployeeEntity> getAllEmployees() {
@@ -33,6 +34,7 @@ public class EmployeeController {
     public EmployeeEntity updateEmployee(@PathVariable Long id, @RequestBody EmployeeEntity employee) {
         return service.updateEmployee(id, employee);
     }
+
 
     @DeleteMapping("/{id}")
     public String deleteEmployee(@PathVariable Long id) {
