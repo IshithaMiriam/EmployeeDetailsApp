@@ -1,6 +1,5 @@
 package com.employee.EmployeeDetails.EmployeeHome;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
-    }                                      //constructor injection
+    }                                //constructor injection, injects service
 
     @PostMapping
     public String createEmployee(@RequestBody List<EmployeeEntity> employees) {

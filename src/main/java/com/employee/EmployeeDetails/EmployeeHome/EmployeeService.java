@@ -13,7 +13,7 @@ public class EmployeeService {
 
     public EmployeeService(EmployeeRepository repository) {
         this.repository = repository;
-    }
+    }  //injects repository
 
     public String createEmployee(List<EmployeeEntity> employees) {
         Set<Long> ids = new HashSet<>();
