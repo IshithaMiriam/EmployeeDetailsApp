@@ -1,87 +1,70 @@
-package com.employee.EmployeeDetails.EmployeeHome;
+package com.employee.EmployeeDetails.EmployeeDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
-@Entity               //represents db table
-public class EmployeeEntity {
-
-    @Id
-    private Long id;      //primary key
-
+public class EmployeeResponseDTO {
+    @Schema(description = "Employee ID", example = "1")
+    private Long id;
+    @Schema(description = "Employee name", example = "Ishitha")
     private String name;
+    @Schema(description = "Employee age", example = "20")
     private int age;
+    @Schema(description = "Date of birth", example = "2006-03-12")
     private LocalDate dob;
+    @Schema(description = "Employee department", example = "IT")
     private String department;
-    private String password;
+    @Schema(description = "Years of experience", example = "2")
     private int yearsOfExperience;
+    @Schema(
+            description = "Calculated salary based on years of experience",
+            example = "40000.0"
+    )
     private double salary;
-
-    public EmployeeEntity() {
-    }           //exists to automatically handle crud, otherwise cannot map
+                      //what postman/frontend receives
+    public EmployeeResponseDTO() {
+    }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
-
     public LocalDate getDob() {
         return dob;
     }
-
     public void setDob(LocalDate dob) {
         this.dob = dob;
     }
-
     public String getDepartment() {
         return department;
     }
-
     public void setDepartment(String department) {
         this.department = department;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public int getYearsOfExperience() {
         return yearsOfExperience;
     }
-
     public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
-
     public double getSalary() {
         return salary;
     }
-
     public void setSalary(double salary) {
         this.salary = salary;
     }
